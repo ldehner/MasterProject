@@ -1,0 +1,13 @@
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\bin\Debug\net8.0\MindCheck.deps.json
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\bin\Debug\net8.0\MindCheck.dll
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\bin\Debug\net8.0\MindCheck.pdb
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.AssemblyInfoInputs.cache
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.AssemblyInfo.cs
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.csproj.CoreCompileInputs.cache
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.sourcelink.json
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.dll
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\refint\MindCheck.dll
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.pdb
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\ref\MindCheck.dll
+C:\Users\linus\Documents\github.com\ldehner\MindCheck\MindCheck\obj\Debug\net8.0\MindCheck.csproj.AssemblyReference.cache

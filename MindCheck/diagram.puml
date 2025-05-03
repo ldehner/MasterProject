@@ -1,0 +1,161 @@
+@startuml
+scale max 1024 width
+skinparam dpi 300
+left to right direction
+package MindCheck.Interfaces {
+    interface ICheck {
+        + Then(check : ICheck) : ICheck
+        + Execute() : ICollection<IResult>
+    }
+
+    interface IResult {
+        + HasPassed : bool
+        + Score : double
+        + Reason : string?
+        + Statements : int?
+    }
+}
+
+package MindCheck.Checks {
+    abstract class BaseCheck implements MindCheck.Interfaces.ICheck {
+        - _nextCheck : ICheck?
+        - Answer : string
+        + BaseCheck(answer : string)
+        + Execute() : ICollection<IResult>
+        + Then(check : ICheck) : ICheck
+        - RunCheck() : IResult
+    }
+
+    class DocumentCheck extends BaseCheck {
+        searchType : AiSearchType
+        requiredDocuments : ICollection<string>
+    }
+
+    class KeyWordCheck extends BaseCheck {
+        keyWords : ICollection<string>
+    }
+}
+
+package MindCheck.Checks.LLM {
+    class BiasCheck extends MindCheck.Checks.BaseCheck {
+        input : string
+        llmCaller : ILlmCaller
+        systemInformation : string = BiasCheck.DefaultSystemInformation
+        opinionCount : int?
+        threshold : double = 0.7
+    }
+
+    class ContextualRelevancyCheck extends MindCheck.Checks.BaseCheck {
+        input : string
+        statementCount : int?
+        llmCaller : ILlmCaller
+        systemInformation : string = ContextualRelevancyCheck.DefaultSystemInformation
+        threshold : double = 0.7
+    }
+
+    class HallucinationCheck extends MindCheck.Checks.BaseCheck {
+        input : string
+        context : ICollection<string>
+        llmCaller : ILlmCaller
+        systemInformation : string = HallucinationCheck.DefaultSystemInformation
+        threshold : double = 0.7
+    }
+
+    class PromptAlignmentCheck extends MindCheck.Checks.BaseCheck {
+        input : string
+        instructions : ICollection<string>
+        llmCaller : ILlmCaller
+        systemInformation : string = PromptAlignmentCheck.DefaultSystemInformation
+        threshold : double = 0.7
+    }
+
+    class ToxicityCheck extends MindCheck.Checks.BaseCheck {
+        input : string
+        llmCaller : ILlmCaller
+        systemInformation : string = ToxicityCheck.DefaultSystemInformation
+        opinionCount : int?
+        threshold : double = 0.7
+    }
+}
+
+package MindCheck.Results.LLM {
+    class BiasCheckResult implements MindCheck.Interfaces.IResult {
+        HasPassed : bool
+        Score : double
+        Reason : string?
+        Statements : int?
+    }
+
+    class ContextualRelevancyCheckResult implements MindCheck.Interfaces.IResult {
+        HasPassed : bool
+        Score : double
+        Reason : string?
+        Statements : int?
+    }
+
+    class HallucinationCheckResult implements MindCheck.Interfaces.IResult {
+        HasPassed : bool
+        Score : double
+        Reason : string?
+        Statements : int?
+    }
+
+    class PromptAlignmentCheckResult implements MindCheck.Interfaces.IResult {
+        HasPassed : bool
+        Score : double
+        Reason : string?
+        Statements : int?
+    }
+
+    class ToxicityCheckResult implements MindCheck.Interfaces.IResult {
+        HasPassed : bool
+        Score : double
+        Reason : string?
+        Statements : int?
+    }
+}
+
+package MindCheck.Results {
+    class DocumentCheckResult implements MindCheck.Interfaces.IResult {
+        HasPassed : bool
+        Score : double
+        Reason : string?
+        Statements: int?
+    }
+
+    class KeyWordCheckResult implements MindCheck.Interfaces.IResult {
+       HasPassed: bool 
+       Score: double 
+       Reason: string? 
+       Statements: int? 
+   }
+}
+package MindCheck.AiSearch {
+    enum AiSearchType {
+        TextSearch
+        EmbeddingSearch
+    }
+
+    class AiSearchResponse {
+        + DocumentName : string
+        + Score : double
+    }
+
+    class AiTextSearch implements MindCheck.Interfaces.IAiSearch {
+        + SearchAsync(text : string) : Task<ICollection<AiSearchResponse>>
+    }
+
+    class AiEmbeddingSearch implements MindCheck.Interfaces.IAiSearch {
+        + SearchAsync(text : string) : Task<ICollection<AiSearchResponse>>
+    }
+}
+
+package MindCheck.Interfaces {
+    interface IAiSearch {
+        + SearchAsync(text : string) : Task<ICollection<MindCheck.AiSearch.AiSearchResponse>>
+    }
+   interface ILlmCaller {
+        + CallLlmServiceAsync(prompt: string, system: string) : Task<string>
+   }
+}
+@enduml
